@@ -19,30 +19,30 @@ const: Block-scoped, cannot be redeclared or reassigned. It must be initialized 
 4. What is the event loop in JavaScript, and how does it handle asynchronous code?
 Answer: JavaScript is single-threaded, meaning it can only execute one task at a time. The Event Loop is the mechanism that allows JavaScript to perform non-blocking asynchronous operations (like API fetches or timers).
 
-# Synchronous code runs instantly on the Call Stack.
+Synchronous code runs instantly on the Call Stack.
 
-# Asynchronous operations are offloaded to the browser APIs. Once completed, their callbacks are sent to the Callback Queue (or Microtask Queue for Promises).
+Asynchronous operations are offloaded to the browser APIs. Once completed, their callbacks are sent to the Callback Queue (or Microtask Queue for Promises).
 
-# The Event Loop continuously checks the Call Stack. If the stack is empty, it pushes the first task from the queue onto the stack to be executed.
+The Event Loop continuously checks the Call Stack. If the stack is empty, it pushes the first task from the queue onto the stack to be executed.
 
 5. What are the differences between an Interface and a Type Alias in TypeScript?
 Answer: Both are used to define the shape of an object, but they have key differences:
 
-# Declaration Merging: Interfaces support declaration merging (if you define two interfaces with the same name, they combine). Type aliases do not allow duplication.
+Declaration Merging: Interfaces support declaration merging (if you define two interfaces with the same name, they combine). Type aliases do not allow duplication.
 
-# Extending: Interfaces extend other interfaces using the extends keyword. Type aliases extend others using intersections (&).
+Extending: Interfaces extend other interfaces using the extends keyword. Type aliases extend others using intersections (&).
 
-# Capabilities: Type aliases can define primitives, unions (e.g., type Status = "success" | "error"), and tuples, which interfaces cannot do.
+Capabilities: Type aliases can define primitives, unions (e.g., type Status = "success" | "error"), and tuples, which interfaces cannot do.
 
 6. What is the Virtual DOM in React, and how does it work?
 Answer: The Virtual DOM (VDOM) is a lightweight, in-memory representation of the real DOM elements.
 When a component's state or props change, React follows a 3-step process:
 
-# React renders the entire UI into a new Virtual DOM snapshot.
+React renders the entire UI into a new Virtual DOM snapshot.
 
-# It compares the new Virtual DOM with the previous snapshot to see exactly what changed. This process is called Diffing.
+It compares the new Virtual DOM with the previous snapshot to see exactly what changed. This process is called Diffing.
 
-# React updates only the changed elements in the real browser DOM. This process is called Reconciliation, and it makes apps much faster by avoiding expensive real DOM manipulation.
+React updates only the changed elements in the real browser DOM. This process is called Reconciliation, and it makes apps much faster by avoiding expensive real DOM manipulation.
 
 7. What are the differences between useEffect and useMemo in React?
 Answer:
@@ -60,15 +60,15 @@ browsers and assistive technologies understand the page structure.
 9. How can you optimize the performance of a frontend web application?
 Answer: Web performance can be optimized using several industry-standard practices:
 
-# Code Splitting / Lazy Loading: Loading components or routes only when they are needed using React.lazy() or dynamic imports.
+Code Splitting / Lazy Loading: Loading components or routes only when they are needed using React.lazy() or dynamic imports.
 
-# Image Optimization: Using modern formats like WebP or AVIF, implementing lazy loading on images, and using responsive image sizes.
+Image Optimization: Using modern formats like WebP or AVIF, implementing lazy loading on images, and using responsive image sizes.
 
-# Minification & Compression: Reducing file sizes of HTML, CSS, and JS files, and serving them using Gzip or Brotli compression.
+Minification & Compression: Reducing file sizes of HTML, CSS, and JS files, and serving them using Gzip or Brotli compression.
 
-# Caching: Using service workers, HTTP caching headers, and Content Delivery Networks (CDNs) to load assets closer to the user.
+Caching: Using service workers, HTTP caching headers, and Content Delivery Networks (CDNs) to load assets closer to the user.
 
-# Reducing Asset Sizes: Eliminating unused packages (tree shaking) and keeping the final bundle size small.
+Reducing Asset Sizes: Eliminating unused packages (tree shaking) and keeping the final bundle size small.
 
 10. Difference between position: relative and absolute? 
 Answer: 
