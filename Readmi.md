@@ -1,76 +1,390 @@
-1. What is the difference between == and === in JavaScript?
-Answer:
+<!-- Zod Interview Questions -->
+# 📚 Interview Questions & Answers
 
-== (Loose Equality) compares two values for equality after converting both values to a common type (Type Coercion). For example, 5 == "5" returns true.
+## 1. What is Zod?
 
-=== (Strict Equality) compares both the value and the type without converting them. If the types are different, it immediately returns false. For example, 5 === "5" returns false.
+### Answer
 
-2. Explain the concept of "Closure" in JavaScript with a simple example.
-Answer: A closure is a feature where an inner function has access to the outer (enclosing) function’s variables, even after the outer function has finished executing.
+Zod is a TypeScript-first schema validation library that helps validate data at runtime while providing automatic TypeScript type inference.
 
-3. What is the difference between var, let, and const?
-Answer:
-var: Function-scoped, can be redeclared and reassigned, and is hoisted to the top of its scope initialized as undefined.
+### Example
 
-let: Block-scoped (only exists inside { }), cannot be redeclared in the same scope, but can be reassigned.
+```ts
+const UserSchema = z.object({
+  name: z.string(),
+  age: z.number(),
+});
+```
 
-const: Block-scoped, cannot be redeclared or reassigned. It must be initialized during declaration.
+### Key Points
 
-4. What is the event loop in JavaScript, and how does it handle asynchronous code?
-Answer: JavaScript is single-threaded, meaning it can only execute one task at a time. The Event Loop is the mechanism that allows JavaScript to perform non-blocking asynchronous operations (like API fetches or timers).
+* Runtime Validation
+* Type Safety
+* Automatic Type Inference
+* Better Error Handling
 
-Synchronous code runs instantly on the Call Stack.
+---
 
-Asynchronous operations are offloaded to the browser APIs. Once completed, their callbacks are sent to the Callback Queue (or Microtask Queue for Promises).
+## 2. Why do we need Zod?
 
-The Event Loop continuously checks the Call Stack. If the stack is empty, it pushes the first task from the queue onto the stack to be executed.
+### Answer
 
-5. What are the differences between an Interface and a Type Alias in TypeScript?
-Answer: Both are used to define the shape of an object, but they have key differences:
+Zod helps ensure that incoming data matches the expected structure and type before it is processed by the application.
 
-Declaration Merging: Interfaces support declaration merging (if you define two interfaces with the same name, they combine). Type aliases do not allow duplication.
+### Benefits
 
-Extending: Interfaces extend other interfaces using the extends keyword. Type aliases extend others using intersections (&).
+* Prevents invalid data
+* Reduces runtime errors
+* Improves code reliability
+* Provides detailed validation errors
 
-Capabilities: Type aliases can define primitives, unions (e.g., type Status = "success" | "error"), and tuples, which interfaces cannot do.
+---
 
-6. What is the Virtual DOM in React, and how does it work?
-Answer: The Virtual DOM (VDOM) is a lightweight, in-memory representation of the real DOM elements.
-When a component's state or props change, React follows a 3-step process:
+## 3. What is the difference between parse() and safeParse()?
 
-React renders the entire UI into a new Virtual DOM snapshot.
+### Answer
 
-It compares the new Virtual DOM with the previous snapshot to see exactly what changed. This process is called Diffing.
+Both methods validate data, but they handle validation failures differently.
 
-React updates only the changed elements in the real browser DOM. This process is called Reconciliation, and it makes apps much faster by avoiding expensive real DOM manipulation.
+### parse()
 
-7. What are the differences between useEffect and useMemo in React?
-Answer:
+Throws an exception when validation fails.
 
-useEffect: Used to handle side effects in a component fetching data, setting up event listeners, manually changing the DOM. It runs after the render phase.
+```ts
+UserSchema.parse(data);
+```
 
-useMemo: Used for performance optimization. It caches (memoizes) the result of a complex calculation so that the calculation doesn't run again on every single render unless its dependencies change.
+### safeParse()
 
-8. What are semantic HTML tags, and why are they important? 
-Answer: Semantic HTML tags clearly describe the meaning and purpose of the content they contain. 
-Examples include <header>, <footer>, <article>, and <section>. 
-They are important because they improve code readability, accessibility, and SEO, helping 
-browsers and assistive technologies understand the page structure. 
+Returns a result object instead of throwing an exception.
 
-9. How can you optimize the performance of a frontend web application?
-Answer: Web performance can be optimized using several industry-standard practices:
+```ts
+const result = UserSchema.safeParse(data);
+```
 
-Code Splitting / Lazy Loading: Loading components or routes only when they are needed using React.lazy() or dynamic imports.
+### Interview Tip
 
-Image Optimization: Using modern formats like WebP or AVIF, implementing lazy loading on images, and using responsive image sizes.
+In production applications, `safeParse()` is generally preferred because it avoids application crashes.
 
-Minification & Compression: Reducing file sizes of HTML, CSS, and JS files, and serving them using Gzip or Brotli compression.
+---
 
-Caching: Using service workers, HTTP caching headers, and Content Delivery Networks (CDNs) to load assets closer to the user.
+## 4. What is z.infer?
 
-Reducing Asset Sizes: Eliminating unused packages (tree shaking) and keeping the final bundle size small.
+### Answer
 
-10. Difference between position: relative and absolute? 
-Answer: 
-● relative: Positioned relative to itself 
-● absolute: Positioned relative to the nearest positioned ancestor (not static)
+`z.infer` automatically generates a TypeScript type from a Zod schema.
+
+### Example
+
+```ts
+const UserSchema = z.object({
+  name: z.string(),
+  age: z.number(),
+});
+
+type User = z.infer<typeof UserSchema>;
+```
+
+### Advantage
+
+No need to write separate interfaces and schemas.
+
+---
+
+## 5. What is refine() in Zod?
+
+### Answer
+
+`refine()` is used to implement custom validation rules that are not available through built-in validators.
+
+### Example
+
+```ts
+const PasswordSchema = z
+  .string()
+  .min(8)
+  .refine(
+    (password) => /[A-Z]/.test(password),
+    {
+      message:
+        "Password must contain at least one uppercase letter",
+    }
+  );
+```
+
+### Common Use Cases
+
+* Password confirmation
+* Business rules
+* Age restrictions
+* Custom validation logic
+
+```
+```
+
+
+<!-- TypeScript -->
+# 📚 TypeScript Interview Questions & Answers
+
+## 1. What is TypeScript?
+
+### Answer
+
+TypeScript is an open-source programming language developed by Microsoft. It is a superset of JavaScript that adds static typing and other advanced features.
+
+### Key Features
+
+* Static Typing
+* Better Code Quality
+* Improved Developer Experience
+* Compile-time Error Detection
+
+---
+
+## 2. What is the difference between TypeScript and JavaScript?
+
+### Answer
+
+JavaScript is dynamically typed, while TypeScript is statically typed.
+
+### JavaScript Example
+
+```js
+let age = "25";
+```
+
+### TypeScript Example
+
+```ts
+let age: number = 25;
+```
+
+### Benefits of TypeScript
+
+* Type Safety
+* Better Autocomplete
+* Easier Refactoring
+* Early Error Detection
+
+---
+
+## 3. What are Primitive Data Types in TypeScript?
+
+### Answer
+
+Primitive data types represent single values.
+
+### Examples
+
+```ts
+let name: string = "Limon";
+
+let age: number = 24;
+
+let isStudent: boolean = true;
+
+let value: null = null;
+
+let data: undefined = undefined;
+```
+
+### Primitive Types
+
+* string
+* number
+* boolean
+* null
+* undefined
+* bigint
+* symbol
+
+---
+
+## 4. What is the difference between any and unknown?
+
+### Answer
+
+`any` disables type checking, while `unknown` is type-safe.
+
+### any Example
+
+```ts
+let value: any = "Hello";
+
+value = 123;
+
+value.toUpperCase();
+```
+
+### unknown Example
+
+```ts
+let value: unknown = "Hello";
+
+if (typeof value === "string") {
+  console.log(value.toUpperCase());
+}
+```
+
+### Interview Tip
+
+Always prefer `unknown` over `any` when possible.
+
+---
+
+## 5. What is the difference between Interface and Type?
+
+### Answer
+
+Both are used to define object shapes, but interfaces support declaration merging and extension more naturally.
+
+### Interface
+
+```ts
+interface User {
+  name: string;
+  age: number;
+}
+```
+
+### Type
+
+```ts
+type User = {
+  name: string;
+  age: number;
+};
+```
+
+### Interview Tip
+
+Use Interface for object structures and Type for unions, intersections, and complex types.
+
+---
+
+## 6. What is Optional Property in TypeScript?
+
+### Answer
+
+Optional properties are not required when creating an object.
+
+### Example
+
+```ts
+interface User {
+  name: string;
+  phone?: string;
+}
+
+const user: User = {
+  name: "Limon",
+};
+```
+
+### Benefit
+
+Allows flexible object creation.
+
+---
+
+## 7. What is a Union Type?
+
+### Answer
+
+A Union Type allows a variable to hold multiple types.
+
+### Example
+
+```ts
+let id: string | number;
+
+id = 101;
+
+id = "EMP-101";
+```
+
+### Use Case
+
+Useful when a value can be more than one type.
+
+---
+
+## 8. What is Type Inference?
+
+### Answer
+
+TypeScript automatically determines the type when it can.
+
+### Example
+
+```ts
+let name = "Limon";
+```
+
+TypeScript automatically infers:
+
+```ts
+let name: string;
+```
+
+### Benefit
+
+Reduces unnecessary type annotations.
+
+---
+
+## 9. What are Generics in TypeScript?
+
+### Answer
+
+Generics allow creating reusable components that work with different types.
+
+### Example
+
+```ts
+function identity<T>(value: T): T {
+  return value;
+}
+
+console.log(identity<string>("Hello"));
+
+console.log(identity<number>(100));
+```
+
+### Benefits
+
+* Reusability
+* Type Safety
+* Cleaner Code
+
+---
+
+## 10. What is the difference between == and === ?
+
+### Answer
+
+`==` compares values after type conversion, while `===` compares both value and type.
+
+### Example
+
+```ts
+console.log(5 == "5");
+```
+
+Output:
+
+```text
+true
+```
+
+### Example
+
+```ts
+console.log(5 === "5");
+```
+
+Output:
+
+```text
+false
+```
